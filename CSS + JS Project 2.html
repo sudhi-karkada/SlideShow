@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+	  #photo {
+		  -webkit-transition: all 8000ms;
+		  -moz-transition: all 8000ms;
+		  -o-transition: all 8000ms;
+		  transition: all 8000ms;
+		  color: rgba(255, 255, 255, 0.6);
+		  font-family: sans-serif;
+		  font-size: 15vh;
+		  text-align: center;
+		  line-height: 50vh;
+		  width: 100%;
+		  height: 100%;
+		}
+    </style>
+	<script type="text/javascript">
+		var tranCount = 0;
+		var trans = "";
+		setInterval(function(){randomTransform(document.querySelector("#photo"))}, 10000);
+
+		// set trans style
+		function setTrans(el) {
+		  // clear transform
+		  el.style.transform = "";
+		  el.style.webkitTransform = "";
+		  el.style.MozTransform = "";
+		  el.style.msTransform = "";
+		  el.style.OTransform = "";
+		  
+		  // set random transform
+		  el.style.webkitTransform = trans;
+		  el.style.MozTransform = trans;
+		  el.style.msTransform = trans;
+		  el.style.OTransform = trans;
+		  el.style.transform = trans;
+		}
+
+		// set a random css transform on the (el)ement
+		function randomTransform(el) {
+			switch(tranCount) {
+				case 6:	//zoom out fully
+					trans = "translate(0,0) scale(1)";
+					tranCount = 0;
+					break;
+				case 1: //zoom into a random position
+					trans = "translate("+(Math.random()*1400-700)+"%, "+(Math.random()*1150-450)+"%) "+"scale(15)";
+					break;
+				default://pan around
+					trans = "translate("+(Math.random()*200-100)+"%, "+(Math.random()*200-100)+"%) "+"scale(15)";
+			}
+
+			//trans = "translate(700%,700%) scale(15)";  //top left stays top left
+			//trans = "translate(700%,-450%) scale(15)"; //bottom left stays bottom left
+			//trans = "translate(-700%,700%) scale(15)"; //top right stays top right
+			//trans = "translate(-700%,-450%) scale(15)"; //bottom right stays bottom right
+
+			tranCount++;
+			setTrans(el);
+		}
+	</script>
+  </head>
+  <body>
+	<div id="photo">
+		<img src='C:\Users\sudhi\Pictures\Projects\Panchavati Couple\digital-48_27.jpg' width="100%"></img>
+	</div>
+  </body>
+</html>
